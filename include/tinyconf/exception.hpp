@@ -7,7 +7,7 @@
 
 #include <stdexcept>
 
-namespace TinyConfig {
+namespace tinyconf {
 
 /// Field check error exception
 struct CheckError
@@ -30,6 +30,6 @@ struct TypeError
     using std::runtime_error::runtime_error;
 };
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_exception_120318163900 */

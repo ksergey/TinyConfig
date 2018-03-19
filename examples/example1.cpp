@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <string_view>
-#include <TinyConfig/config.hpp>
+#include <tinyconf/config.hpp>
 
 using namespace std::string_view_literals;
 
@@ -17,8 +17,8 @@ struct SubValue
     void serialize(Ar& ar)
     {
         ar
-            & TinyConfig::required("key", key, TinyConfig::nonEmpty())
-            & TinyConfig::optional("value", value, ""sv);
+            & tinyconf::required("key", key, tinyconf::nonEmpty())
+            & tinyconf::optional("value", value, ""sv);
     }
 };
 
@@ -36,13 +36,13 @@ struct Entry
     void serialize(Ar& ar)
     {
         ar
-            & TinyConfig::required("value1", value1, TinyConfig::endsWith("lo"))
-            & TinyConfig::required("value2", value2, TinyConfig::oneOf({100, 101, 150}))
-            & TinyConfig::optional("value3", value3, 5.1)
-            & TinyConfig::required("value4", value4)
-            & TinyConfig::optional("value5", value5, SubValue{"demo", "none"})
-            & TinyConfig::required("value6", value6, TinyConfig::nonEmpty())
-            & TinyConfig::required("value7", value7);
+            & tinyconf::required("value1", value1, tinyconf::endsWith("lo"))
+            & tinyconf::required("value2", value2, tinyconf::oneOf({100, 101, 150}))
+            & tinyconf::optional("value3", value3, 5.1)
+            & tinyconf::required("value4", value4)
+            & tinyconf::optional("value5", value5, SubValue{"demo", "none"})
+            & tinyconf::required("value6", value6, tinyconf::nonEmpty())
+            & tinyconf::required("value7", value7);
     }
 };
 
@@ -62,11 +62,11 @@ int main(int argc, char* argv[])
 {
     try {
         Entry entry;
-        TinyConfig::fromJsonString(text, entry);
-        std::cout << TinyConfig::toJsonString(entry) << '\n';
+        tinyconf::fromJsonString(text, entry);
+        std::cout << tinyconf::toJsonString(entry) << '\n';
 
         entry.value5.key = "-_-_-_-_-_";
-        std::cout << TinyConfig::toJsonString(entry) << '\n';
+        std::cout << tinyconf::toJsonString(entry) << '\n';
 
     } catch (const std::exception& e) {
         std::cout << "ERROR: " << e.what() << '\n';

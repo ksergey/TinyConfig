@@ -12,7 +12,7 @@
 #include <string>
 #include "exception.hpp"
 
-namespace TinyConfig {
+namespace tinyconf {
 namespace detail {
 
 /// STL-based checker
@@ -140,6 +140,6 @@ auto oneOf(std::initializer_list< T > values)
     };
 }
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_checker_120318174207 */

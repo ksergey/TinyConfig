@@ -7,7 +7,7 @@
 
 #include "json.hpp"
 
-namespace TinyConfig {
+namespace tinyconf {
 
 /// Read from JSON helper
 class Input
@@ -53,6 +53,6 @@ inline void serialize(IO& io, DTO& dto)
     dto.serialize(io);
 }
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_io_120318172355 */

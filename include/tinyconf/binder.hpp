@@ -10,7 +10,7 @@
 #include "policy.hpp"
 #include "read_write.hpp"
 
-namespace TinyConfig {
+namespace tinyconf {
 
 /// Field binder
 /// Write value itno json and perform field value checks during i/o
@@ -86,6 +86,6 @@ inline void Binder< Field, Policy, Checker >::write(nlohmann::json& json) const
     json[fieldName_] = entry;
 }
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_binder_120318164518 */

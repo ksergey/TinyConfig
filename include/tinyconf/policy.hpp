@@ -7,7 +7,7 @@
 
 #include "exception.hpp"
 
-namespace TinyConfig {
+namespace tinyconf {
 
 /// Field required policy
 struct PolicyRequired
@@ -39,6 +39,6 @@ public:
     }
 };
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_policy_120318170542 */

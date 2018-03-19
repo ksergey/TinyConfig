@@ -10,7 +10,7 @@
 #include <array>
 #include "io.hpp"
 
-namespace TinyConfig {
+namespace tinyconf {
 namespace detail {
 
 template< class T, class = std::void_t<> >
@@ -130,6 +130,6 @@ inline void writeValue(const std::array< T, N >& value, nlohmann::json& json)
     }
 }
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_read_write_120318173256 */

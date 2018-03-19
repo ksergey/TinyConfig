@@ -10,7 +10,7 @@
 #include "binder.hpp"
 #include "checker.hpp"
 
-namespace TinyConfig {
+namespace tinyconf {
 
 /// Read/write field as required
 template< class Field, class Checker = NullChecker >
@@ -60,6 +60,6 @@ inline std::string toJsonString(const T& object, int indent = 2)
     return json.dump(indent);
 }
 
-} /* namespace TinyConfig */
+} /* namespace tinyconf */
 
 #endif /* KSERGEY_config_190318112033 */
