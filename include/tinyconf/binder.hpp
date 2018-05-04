@@ -19,6 +19,7 @@ class Binder
 {
 private:
     const std::string fieldName_;
+    bool secret_{false};
     Field& field_;
     Policy policy_;
     Checker checker_;
@@ -29,6 +30,9 @@ public:
 
     /// Constructor
     Binder(std::string fieldName, Field& field, Policy&& policy, Checker&& checker);
+
+    /// Make field secret for writing
+    Binder& setSecret() noexcept;
 
     /// Read field value
     void read(const nlohmann::json& json) const;
@@ -44,6 +48,13 @@ inline Binder< Field, Policy, Checker >::Binder(std::string fieldName, Field& fi
     , policy_{std::move(policy)}
     , checker_{std::move(checker)}
 {}
+
+template< class Field, class Policy, class Checker >
+inline Binder< Field, Policy, Checker >& Binder< Field, Policy, Checker >::setSecret() noexcept
+{
+    secret_ = true;
+    return *this;
+}
 
 template< class Field, class Policy, class Checker >
 inline void Binder< Field, Policy, Checker >::read(const nlohmann::json& json) const
@@ -77,13 +88,17 @@ inline void Binder< Field, Policy, Checker >::write(nlohmann::json& json) const
         throw CheckError{"Value for field \"" + fieldName_ + "\" not passed validation"};
     }
 
-    nlohmann::json entry;
-    // TODO: make writeValue return bool and thdow exception here
-    // TODO: rename to toJson?
-    // writeValue is free function
-    writeValue(field_, entry);
+    if (!secret_) {
+        nlohmann::json entry;
+        // TODO: make writeValue return bool and thdow exception here
+        // TODO: rename to toJson?
+        // writeValue is free function
+        writeValue(field_, entry);
 
-    json[fieldName_] = entry;
+        json[fieldName_] = entry;
+    } else {
+        json[fieldName_] = "<-- hidden -->";
+    }
 }
 
 } /* namespace tinyconf */

@@ -31,6 +31,7 @@ struct Entry
     SubValue value5;
     std::vector< int > value6;
     std::array< int, 3 > value7;
+    std::string value8;
 
     template< class Ar >
     void serialize(Ar& ar)
@@ -42,7 +43,8 @@ struct Entry
             & tinyconf::required("value4", value4)
             & tinyconf::optional("value5", value5, SubValue{"demo", "none"})
             & tinyconf::required("value6", value6, tinyconf::nonEmpty())
-            & tinyconf::required("value7", value7);
+            & tinyconf::required("value7", value7)
+            & tinyconf::required("value8", value8).setSecret();
     }
 };
 
@@ -55,7 +57,8 @@ static constexpr auto text = R"(
         "value": "123"
     },
     "value6": [ 1, 3, 4, 6 ],
-    "value7": [ 255, 15, 1 ]
+    "value7": [ 255, 15, 1 ],
+    "value8": "supersecretfield value"
 })"sv;
 
 int main(int argc, char* argv[])
